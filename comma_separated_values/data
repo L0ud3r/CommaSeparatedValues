@@ -1,22 +1,22 @@
-Country,Capital,Currency,Primary Language
-Afghanistan,Kabul,Afghani,"Dari Persian, Pashto"
-Albania,Tirane,Lek,Albanian
-Algeria,Algiers,Algerian Dinar,"Arabic, Tamazight, French"
-Andorra,Andorra la Vella,Euro,Catalan
-Angola,Luanda,Kwanza,Portuguese
-Antigua & Barbuda,Saint John's,East Caribbean Dollar,English
-Argentina,Buenos Aires,Argentine Peso,Spanish
-Armenia,Yerevan,Dram,Armenian
-Australia,Canberra,Australian Dollar,English
-Austria,Vienna,Euro,German
-Azerbaijan,Baku,Manat,Azerbaijani
-The Bahamas,Nassau,Bahamian Dollar,English
-Bahrain,Manama,Bahraini Dinar,Arabic
-Bangladesh,Dhaka,Taka,Bangla
-Barbados,Bridgetown,Barbadian Dollar,English
-Belarus,Minsk,Belarusian Ruble,"Belarusian, Russian"
-Belgium,Brussels,Euro,"Dutch, French, German"
-Belize,Belmopan,Belize Dollar,English
-Benin,Porto-Novo,West African CFA Franc,French
-Bhutan,Thimphu,Ngultrum,Dzongkha
-Bolivia,"La Paz, Sucre",Boliviano,"Spanish, Quechua, Aymara"
+Country,Capital,Currency,Primary Language, Leader
+Afghanistan,Kabul,Afghani,"Dari Persian, Pashto", Leader
+Albania,Tirane,Lek,Albanian, Leader
+Algeria,Algiers,Algerian Dinar,"Arabic, Tamazight, French", Leader
+Andorra,Andorra la Vella,Euro,Catalan, Leader
+Angola,Luanda,Kwanza,Portuguese, Leader
+Antigua & Barbuda,Saint John's,East Caribbean Dollar,English, Leader
+Argentina,Buenos Aires,Argentine Peso,Spanish, Leader
+Armenia,Yerevan,Dram,Armenian, Leader
+Australia,Canberra,Australian Dollar,English, Leader
+Austria,Vienna,Euro,German, Leader
+Azerbaijan,Baku,Manat,Azerbaijani, Leader
+The Bahamas,Nassau,Bahamian Dollar,English, Leader
+Bahrain,Manama,Bahraini Dinar,Arabic, Leader
+Bangladesh,Dhaka,Taka,Bangla, Leader
+Barbados,Bridgetown,Barbadian Dollar,English, Leader
+Belarus,Minsk,Belarusian Ruble,"Belarusian, Russian", Leader
+Belgium,Brussels,Euro,"Dutch, French, German", Leader
+Belize,Belmopan,Belize Dollar,English, Leader
+Benin,Porto-Novo,West African CFA Franc,French, Leader
+Bhutan,Thimphu,Ngultrum,Dzongkha, Leader
+Bolivia,"La Paz, Sucre",Boliviano,"Spanish, Quechua, Aymara", Leader

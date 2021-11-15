@@ -11,7 +11,7 @@ states = (
     ("capital", "exclusive"),
     ("currency", "exclusive"),
     ("language", "exclusive"),
-    #("leader", "exclusive")
+    ("leader", "exclusive")
 )
 
 # Ignore rule
@@ -37,16 +37,17 @@ def t_currency_STR(t):
     return t
 
 def t_language_STR(t):
-    r"[^,\n]+"       #situação das aspas?
+    # r'".+"' #para ler com aspas
+    r"[^,]+" #ler sem aspas
     t.type = "LANGUAGE"
-    t.lexer.begin("INITIAL")
+    t.lexer.begin("leader")
     return t
 
-#def t_leader_LEADER(t):
-#    r"[^,\n]+"
-#    t.type = "LEADER"
-#    t.lexer.begin("INITIAL")
-#    return t
+def t_leader_LEADER(t):
+    r"[^,\n]+"
+    t.type = "LEADER"
+    t.lexer.begin("INITIAL")
+    return t
 
 def t_NEWLINE(t):
     r"\n"
