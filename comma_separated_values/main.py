@@ -15,11 +15,11 @@ states = (
 )
 
 # Ignore rule
-t_ANY_ignore = r",\""
+t_ANY_ignore = r","
 
 # Funcoes de definicao de campo lexical
 def t_STR(t):
-    r"[^,]+|[\"\".+\"\"]"
+    r"[^,]+"
     t.type = "COUNTRY"
     t.lexer.begin("capital")
     return t
@@ -43,7 +43,7 @@ def t_language_STR(t):
     return t
 
 def t_leader_LEADER(t):
-    r"[^\n]+"
+    r"[^,\n]+"
     t.type = "LEADER"
     t.lexer.begin("INITIAL")
     return t
