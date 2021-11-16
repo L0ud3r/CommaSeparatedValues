@@ -44,7 +44,7 @@ def t_language_STR(t):
     return t
 
 def t_leader_LEADER(t):
-    r"[^,\n]+"
+    r"[^,]+"
     t.type = "LEADER"
     t.lexer.begin("INITIAL")
     return t
