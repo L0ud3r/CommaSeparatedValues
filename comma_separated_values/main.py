@@ -24,7 +24,7 @@ def t_STR(t):
     return t
 
 def t_capital_STR(t):
-    r"[^,]+"
+    r'"[A-Z][a-z]+,?]"|[^,]+'
     t.type = "CAPITAL"
     t.lexer.begin("currency")
     return t
