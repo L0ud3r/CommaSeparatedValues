@@ -37,8 +37,8 @@ def t_currency_STR(t):
     return t
 
 def t_language_STR(t):
-    # r'".+"' #para ler com aspas
-    r"[^,]+" #ler sem aspas
+    # r'".+"'                               #para ler com aspas
+    r"\".+\"|[^,]+"                         #ler sem aspas
     t.type = "LANGUAGE"
     t.lexer.begin("leader")
     return t
@@ -73,3 +73,11 @@ for token in iter(lexer.token, None):
         # print(f"{token.value}\t", end='')
 
 
+
+
+
+
+# TESTE
+# "[[[A-Z|a-z]+,|[[A-Z|a-z]+
+# "[.+]"|[^,]+
+# "[A-Z]+[a-z]+,?"|[^,]+
