@@ -1,0 +1,2 @@
+Arranjar expressao para ler tudo entre as aspas
+fix primeira linha com espaços

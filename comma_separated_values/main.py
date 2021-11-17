@@ -4,14 +4,13 @@ from my_utils import slurp
 from pprint import PrettyPrinter
 
 # Tokens
-tokens = ("STR", "COUNTRY", "CAPITAL", "CURRENCY", "LANGUAGE", "LEADER", "NEWLINE")
+tokens = ("STR", "COUNTRY", "CAPITAL", "CURRENCY", "LANGUAGE", "NEWLINE")
 
 # States
 states = (
     ("capital", "exclusive"),
     ("currency", "exclusive"),
     ("language", "exclusive"),
-    ("leader", "exclusive")
 )
 
 # Ignore rule
@@ -37,15 +36,8 @@ def t_currency_STR(t):
     return t
 
 def t_language_STR(t):
-    # r'".+"'                               #para ler com aspas
-    r"\".+\"|[^,]+"                         #ler sem aspas
+    r'".+"|[A-Z][a-z]+'
     t.type = "LANGUAGE"
-    t.lexer.begin("leader")
-    return t
-
-def t_leader_LEADER(t):
-    r"[^,]+"
-    t.type = "LEADER"
     t.lexer.begin("INITIAL")
     return t
 
@@ -54,7 +46,7 @@ def t_NEWLINE(t):
     pass
 
 def t_ANY_error(t):
-    print(f"Unexpected token: {t.value[:10]}")
+    print(f"Unexpected token: {t.value[:20]}")
     exit(1)
 
 # Montar o lexer com as tokens em cima
@@ -65,7 +57,7 @@ lexer.input(slurp("data"))
 # printagem em console do lexer
 i = 0
 for token in iter(lexer.token, None):
-    if i < 5:
+    if i < 4:
         i += 1
     else:
         # print teste
