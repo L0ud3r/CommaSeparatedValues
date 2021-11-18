@@ -24,7 +24,7 @@ def t_STR(t):
     return t
 
 def t_capital_STR(t):
-    r'"([A-Z][a-z]*,?\s?)*"|([A-Z]?[a-z]+-?\s?\'?)+'
+    r'"([A-Z][a-z]*,?\s?)*"|([A-Z][a-z]*-?\s?\'?)+'
     t.type = "CAPITAL"
     t.lexer.begin("currency")
     return t
@@ -52,7 +52,7 @@ def t_ANY_error(t):
 # Montar o lexer com as tokens em cima
 lexer = lex.lex()
 # Ler o documento data
-lexer.input(slurp("data"))
+lexer.input(slurp("list1.csv"))
 
 # printagem em console do lexer
 i = 0
