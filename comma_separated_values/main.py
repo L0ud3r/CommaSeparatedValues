@@ -62,7 +62,14 @@ for token in iter(lexer.token, None):
     else:
         # print teste
         print(f"{token.value} <- {token.type}\t", end = '')
+
+        # print por Type
+        # if token.type == "COUNTRY":
+            # print(f"{token.value}", end='')
+
+        # print ALL
         # print(f"{token.value}\t", end='')
+
 
 
 
