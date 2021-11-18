@@ -18,7 +18,7 @@ t_ANY_ignore = r","
 
 # Funcoes de definicao de campo lexical
 def t_STR(t):
-    r"[^,]+"
+    r"(([A-Z]|[a-z])[^,]+)"
     t.type = "COUNTRY"
     t.lexer.begin("capital")
     return t
@@ -62,6 +62,7 @@ for token in iter(lexer.token, None):
     else:
         # print teste
         print(f"{token.value} <- {token.type}\t", end = '')
+        print("\n")
         # print(f"{token.value}\t", end='')
 
 
