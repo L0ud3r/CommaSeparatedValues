@@ -85,7 +85,6 @@ class Reader:
                 else:
                     if value == token.type:
                         if token.type == "COUNTRY":
-                            token.type = str(token.type)
-                            token.type[0] = '\0'
+                            token.value = token.value.replace('\n','')
                         # print teste
                         print(f"{token.value}\n", end='')
