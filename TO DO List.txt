@@ -1,2 +1,5 @@
-Arranjar expressao para ler tudo entre as aspas
-fix primeira linha com espaços
+Evitar \n inicial nas printagens na token COUNTRY
+Fazer output em LaTex e HTML
+No fim do project, tentar remover \n inicial na token COUNTRY e remover funcionalidade de evitar
+o \n nas printagens
+
