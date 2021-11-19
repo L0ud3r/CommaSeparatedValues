@@ -63,7 +63,7 @@ class Reader:
         return obje
 
     def parse(self, filename):
-        value = input("(Se pretender ver o output da tabela inteira dê enter)\nCaso contrário insira um token:  ")
+        value = input("(Se pretender ver o output da tabela inteira dê enter)\nCaso contrário insira um token:  ").upper()
         lista = ("COUNTRY", "CAPITAL", "CURRENCY", "LANGUAGE")
 
         # PARA DEIXAR A PRINTAR COMO ANTES COPIAR TUDO O QUE ESTA DENTRO DO if value not in list:
