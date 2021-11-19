@@ -63,26 +63,12 @@ class Reader:
         return obje
 
     def parse(self, filename):
-        value = input("(Se pretender ver o output da tabela inteira)\nInsira um token:  ")
-        lista = ("COUNTRY", "CAPITAL", "CURRENCY", "LANGUAGE")
+        self.lexer.input(slurp(filename))
+        i = 0
+        for token in iter(self.lexer.token, None):
+            if i < 4:
+                i += 1
+            else:
+                # print teste
+                print(f"{token.value} <- {token.type}\t", end='')
 
-        # PARA DEIXAR A PRINTAR COMO ANTES COPIAR TUDO O QUE ESTA DENTRO DO if value not in list:
-        if value not in lista:
-            self.lexer.input(slurp(filename))
-            i = 0
-            for token in iter(self.lexer.token, None):
-                if i < 4:
-                    i += 1
-                else:
-                    # print teste
-                    print(f"{token.value}\t", end='')
-        else:
-            self.lexer.input(slurp(filename))
-            i = 0
-            for token in iter(self.lexer.token, None):
-                if i < 4:
-                    i += 1
-                else:
-                    if value == token.type:
-                        # print teste
-                        print(f"{token.value}\t", end='')
