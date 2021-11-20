@@ -128,8 +128,7 @@ class Reader:
                     if i < 1:
                         html += f"<th>{token.value}</th></tr>"
                         i += 1
-                else:
-                    if value == token.type:
+                    else:
                         html += f"</tr><tr><td>{token.value}</td>"
 
         html += "</table></body></html>"
