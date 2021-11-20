@@ -1,5 +1,9 @@
 HTML:
-fix linhas 127 e 132: value nao esta a ser == a token.type
+
 
 LaTex:
 Fazer Latex
+
+
+HTML & Latex:
+Permitir que utilizador selecione várias colunas
