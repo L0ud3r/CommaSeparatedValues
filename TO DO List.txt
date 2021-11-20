@@ -1,4 +1,4 @@
-Fazer output em LaTex e HTML
-No fim do project, tentar remover \n inicial na token COUNTRY e remover funcionalidade de evitar
-o \n nas printagens
+HTML:
+remover aspas
 
+LaTex:
