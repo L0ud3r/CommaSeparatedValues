@@ -1,5 +1,5 @@
 HTML:
-remover aspas
 fix linhas 127 e 132: value nao esta a ser == a token.type
 
 LaTex:
+Fazer Latex
