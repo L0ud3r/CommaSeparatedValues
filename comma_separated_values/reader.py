@@ -103,7 +103,7 @@ class Reader:
             if element == "NEWLINE":
                 headers.remove(element)
 
-        html = "<html><body><table><tr>"
+        html = '<html><head><link rel="stylesheet" href="styles.css"></head><body><table><tr>'
 
         if value not in headers:
             i = 0
@@ -111,7 +111,8 @@ class Reader:
             for token in iter(self.lexer.token, None):
                 if i < len(headers):
                     i += 1
-                    html += f"<th>{token.value}</th>"
+                    tokenFinal = token.value.replace('"', '')
+                    html += f"<th>{tokenFinal}</th>"
                     if i == len(headers):
                         html += "</tr>"
                         i += 1
@@ -119,7 +120,8 @@ class Reader:
                     if j == len(headers):
                         html += "</tr><tr>"
                         j = 0
-                    html += f"<td>{token.value}</td>"
+                    tokenFinal = token.value.replace('"', '')
+                    html += f"<td>{tokenFinal}</td>"
                     j += 1
         else:
             i = 0
