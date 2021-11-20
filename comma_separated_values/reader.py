@@ -124,15 +124,13 @@ class Reader:
         else:
             i = 0
             for token in iter(self.lexer.token, None):
-                if i < 4:
-                    i += 1
+                if value == token.type:
+                    if i < 1:
+                        html += f"<th>{token.value}</th></tr>"
+                        i += 1
                 else:
                     if value == token.type:
-                        # Remover \n do inicio dos tokens.type COUNTRY
-                        if token.type == "COUNTRY":
-                            token.value = token.value.replace('\n','')
-                        # print teste
-                        print(f"{token.value}\n", end='')
+                        html += f"</tr><tr><td>{token.value}</td>"
 
         html += "</table></body></html>"
         f.write(html)
