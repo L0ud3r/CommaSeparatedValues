@@ -1,7 +1,8 @@
 # test0.1
+import webbrowser
+
 import ply.lex as lex
 from my_utils import slurp
-from pprint import PrettyPrinter
 
 
 class Reader:
@@ -62,13 +63,14 @@ class Reader:
         obje.lexer = lex.lex(module=obje, **kwargs)
         return obje
 
-    def parse(self, filename):
-        value = input("(Se pretender ver o output da tabela inteira dê enter)\nCaso contrário insira um token:  ").upper()
+    def print(self, filename):
+        value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
+                      "Caso contrário insira um token:  ").upper()
         lista = ("COUNTRY", "CAPITAL", "CURRENCY", "LANGUAGE")
+        self.lexer.input(slurp(filename))
 
         # PARA DEIXAR A PRINTAR COMO ANTES COPIAR TUDO O QUE ESTA DENTRO DO if value not in list:
         if value not in lista:
-            self.lexer.input(slurp(filename))
             i = 0
             for token in iter(self.lexer.token, None):
                 if i < 4:
@@ -77,7 +79,6 @@ class Reader:
                     # print teste
                     print(f"{token.value}\t", end='')
         else:
-            self.lexer.input(slurp(filename))
             i = 0
             for token in iter(self.lexer.token, None):
                 if i < 4:
@@ -89,3 +90,47 @@ class Reader:
                             token.value = token.value.replace('\n','')
                         # print teste
                         print(f"{token.value}\n", end='')
+
+    def html(self, filename):
+        f = open("file.html", "w")
+        self.lexer.input(slurp(filename))
+        value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
+                      "Caso contrário insira um token:  ").upper()
+        lista = ("COUNTRY", "CAPITAL", "CURRENCY", "LANGUAGE")
+        html = "<html>\n<head>\t\n" \
+               "<body>\n<h1> "
+
+        if value not in lista:
+            i = 0
+            j = 0
+            for token in iter(self.lexer.token, None):
+                if i < 4:
+                    html += f"{token.value}  "
+                    i += 1
+                elif i == 4:
+                    html += "\n<\h1>\n" \
+                            "<h3> "
+                    i += 1
+                else:
+                    if j == 4:
+                        html += "\n"
+                    html += f"{token.value}  "
+                    j += 1
+        else:
+            i = 0
+            for token in iter(self.lexer.token, None):
+                if i < 4:
+                    i += 1
+                else:
+                    if value == token.type:
+                        # Remover \n do inicio dos tokens.type COUNTRY
+                        if token.type == "COUNTRY":
+                            token.value = token.value.replace('\n','')
+                        # print teste
+                        print(f"{token.value}\n", end='')
+
+        html += " <\h3>\n<body>\n<\html>"
+
+        f.write(html)
+        f.close()
+        webbrowser.open_new_tab("file.html")
