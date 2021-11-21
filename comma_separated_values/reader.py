@@ -137,3 +137,64 @@ class Reader:
         f.write(html)
         f.close()
         webbrowser.open_new_tab("file.html")
+
+    def latex(self, filename):
+        f = open("file.tex", "w")
+        self.lexer.input(slurp(filename))
+        value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
+                      "Caso contrário insira um token:  ").upper()
+
+        headers = [member for member in self.tokens]
+
+        for element in headers:
+            if element == "NEWLINE":
+                headers.remove(element)
+
+        latex = '\documentclass{article}\\begin{document}\\begin{center}\\begin{tabular}{||'
+
+
+
+
+        if value not in headers:
+            for element in headers:
+                latex += 'c '
+            latex += '||} \hline '
+
+            i = 0
+            j = 0
+            for token in iter(self.lexer.token, None):
+                if i < len(headers)-1:
+                    tokenFinal = token.value.replace('"', '')
+                    latex += f"{tokenFinal} & "
+                    i += 1
+                elif i == len(headers)-1:
+                    tokenFinal = token.value.replace('"', '')
+                    latex += f"{tokenFinal} \\\\ [0.5ex] \hline \hline"
+                    i += 1
+                else:
+                    if j<len(headers)-1:
+                        tokenFinal = token.value.replace('"', '')
+                        latex += f"\makecell{{{tokenFinal}}}"
+                        j += 1
+                    elif j == len(headers)-1:
+                        tokenFinal = token.value.replace('"', '')
+                        latex += f"\makecell{{{tokenFinal}}} \\\\ \hline"
+                        j = 0
+
+
+
+        else:
+            latex += 'c ||} \hline'
+            i = 0
+            for token in iter(self.lexer.token, None):
+                if value == token.type:
+                    if i < 1:
+                        latex += f"{token.value}\\\\[0.5ex] \hline\hline"
+                        i += 1
+                    else:
+                        latex += f"{token.value} \\\\ \hline"
+
+        latex += "\end{tabular}\end{center}\end{document}"
+        f.write(latex)
+        f.close()
+        webbrowser.open_new_tab("file.tex")
