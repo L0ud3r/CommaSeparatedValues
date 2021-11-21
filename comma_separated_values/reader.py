@@ -2,7 +2,7 @@
 import webbrowser
 
 import ply.lex as lex
-from my_utils import slurp
+from my_utils import slurp, replace_multiple
 
 
 class Reader:
@@ -161,20 +161,20 @@ class Reader:
             j = 0
             for token in iter(self.lexer.token, None):
                 if i < len(headers)-1:
-                    token_final = token.value.replace('"', '')
+                    token_final = replace_multiple(token.value, {'"': '', "&": "\\&"})
                     latex += f"{token_final} & "
                     i += 1
                 elif i == len(headers)-1:
-                    token_final = token.value.replace('"', '')
+                    token_final = replace_multiple(token.value, {'"': '', "&": "\\&"})
                     latex += f"{token_final} \\\\ [0.5ex] \hline \hline"
                     i += 1
                 else:
                     if j<len(headers)-1:
-                        token_final = token.value.replace('"', '')
+                        token_final = replace_multiple(token.value, {'"': '', "&": "\\&"})
                         latex += f"{token_final} & "
                         j += 1
                     elif j == len(headers)-1:
-                        token_final = token.value.replace('"', '')
+                        token_final = replace_multiple(token.value, {'"': '', "&": "\\&"})
                         latex += f"{token_final} \\\\ \hline"
                         j = 0
         else:
@@ -183,10 +183,12 @@ class Reader:
             for token in iter(self.lexer.token, None):
                 if value == token.type:
                     if i < 1:
-                        latex += f"{token.value}\\\\[0.5ex] \hline\hline"
+                        token_final = replace_multiple(token.value, {'"': '', "&": "\\&"})
+                        latex += f"{token_final}\\\\[0.5ex] \hline\hline "
                         i += 1
                     else:
-                        latex += f"{token.value} \\\\ \hline"
+                        token_final = replace_multiple(token.value, {'"': '', "&": "\\&"})
+                        latex += f"{token_final} \\\\ \hline "
 
         latex += "\end{tabular}\end{center}\end{document}"
         f.write(latex)
