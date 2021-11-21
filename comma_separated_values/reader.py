@@ -111,8 +111,8 @@ class Reader:
             for token in iter(self.lexer.token, None):
                 if i < len(headers):
                     i += 1
-                    tokenFinal = token.value.replace('"', '')
-                    html += f"<th>{tokenFinal}</th>"
+                    token_final = token.value.replace('"', '')
+                    html += f"<th>{token_final}</th>"
                     if i == len(headers):
                         html += "</tr>"
                         i += 1
@@ -120,8 +120,8 @@ class Reader:
                     if j == len(headers):
                         html += "</tr><tr>"
                         j = 0
-                    tokenFinal = token.value.replace('"', '')
-                    html += f"<td>{tokenFinal}</td>"
+                    token_final = token.value.replace('"', '')
+                    html += f"<td>{token_final}</td>"
                     j += 1
         else:
             i = 0
@@ -152,9 +152,6 @@ class Reader:
 
         latex = '\documentclass{article}\\begin{document}\\begin{center}\\begin{tabular}{||'
 
-
-
-
         if value not in headers:
             for element in headers:
                 latex += 'c '
@@ -164,25 +161,22 @@ class Reader:
             j = 0
             for token in iter(self.lexer.token, None):
                 if i < len(headers)-1:
-                    tokenFinal = token.value.replace('"', '')
-                    latex += f"{tokenFinal} & "
+                    token_final = token.value.replace('"', '')
+                    latex += f"{token_final} & "
                     i += 1
                 elif i == len(headers)-1:
-                    tokenFinal = token.value.replace('"', '')
-                    latex += f"{tokenFinal} \\\\ [0.5ex] \hline \hline"
+                    token_final = token.value.replace('"', '')
+                    latex += f"{token_final} \\\\ [0.5ex] \hline \hline"
                     i += 1
                 else:
                     if j<len(headers)-1:
-                        tokenFinal = token.value.replace('"', '')
-                        latex += f"{tokenFinal} & "
+                        token_final = token.value.replace('"', '')
+                        latex += f"{token_final} & "
                         j += 1
                     elif j == len(headers)-1:
-                        tokenFinal = token.value.replace('"', '')
-                        latex += f"{tokenFinal} \\\\ \hline"
+                        token_final = token.value.replace('"', '')
+                        latex += f"{token_final} \\\\ \hline"
                         j = 0
-
-
-
         else:
             latex += 'c ||} \hline '
             i = 0
