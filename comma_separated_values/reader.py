@@ -174,17 +174,17 @@ class Reader:
                 else:
                     if j<len(headers)-1:
                         tokenFinal = token.value.replace('"', '')
-                        latex += f"\makecell{{{tokenFinal}}}"
+                        latex += f"{tokenFinal} & "
                         j += 1
                     elif j == len(headers)-1:
                         tokenFinal = token.value.replace('"', '')
-                        latex += f"\makecell{{{tokenFinal}}} \\\\ \hline"
+                        latex += f"{tokenFinal} \\\\ \hline"
                         j = 0
 
 
 
         else:
-            latex += 'c ||} \hline'
+            latex += 'c ||} \hline '
             i = 0
             for token in iter(self.lexer.token, None):
                 if value == token.type:
