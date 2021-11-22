@@ -6,4 +6,4 @@ Fazer Latex
 
 
 HTML & Latex:
-Permitir que utilizador selecione várias colunas
+Permitir que utilizador selecione várias colunas (?)

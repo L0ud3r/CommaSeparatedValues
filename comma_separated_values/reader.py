@@ -1,4 +1,4 @@
-# test0.1
+# reader.py
 import webbrowser
 
 import ply.lex as lex
@@ -20,40 +20,47 @@ class Reader:
     t_ANY_ignore = r","
 
     # Funcoes de definicao de campo lexical
+
+
+    # Função que serve para reconhecer o campo Country do ficheiro de texto
     def t_COUNTRY(self, t):
         r"[^,]+"
         t.type = "COUNTRY"
         t.lexer.begin("capital")
         return t
 
+    # Função que serve para reconhecer o campo Capital do ficheiro de texto
     def t_capital_STR(self, t):
         r'"([A-Z][a-z]*,?\s?)*"|(([A-Z]|[a-z])[^,]+)'
         t.type = "CAPITAL"
         t.lexer.begin("currency")
         return t
 
+    # Função que serve para reconhecer o campo Currency do ficheiro de texto
     def t_currency_STR(self, t):
         r'"([A-Z][a-z]*,?\s?)*"|(([A-Z]|[a-z])[^,]+)'
         t.type = "CURRENCY"
         t.lexer.begin("language")
         return t
 
+    # Função que serve para reconhecer o campo Language do ficheiro de texto
     def t_language_STR(self, t):
         r'".+"|(([A-Z]|[a-z])[^\n]+)'
         t.type = "LANGUAGE"
         t.lexer.begin("INITIAL")
         return t
 
+    # Função que serve para reconhecer o "parágrafo"/"\n"/nova linha
     def t_NEWLINE(self, t):
         r"\n"
         pass
 
+    # Função que retorna um erro caso o token lido não seja o esperado
     def t_ANY_error(self, t):
         print(f"Unexpected token: {t.value[:20]}")
         exit(1)
 
     # to fix (decidir se o input do user na consola vira atributo da classe
-    # Caso input == None, fazer output tabela toda)
     def __init__(self):
         self.lexer = None
 
@@ -63,6 +70,8 @@ class Reader:
         obje.lexer = lex.lex(module=obje, **kwargs)
         return obje
 
+    # Procedimento para printar as colunas lidas do ficheiro de texto
+    # Recebe o filename do ficheiro de texto
     def print(self, filename):
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
@@ -91,6 +100,8 @@ class Reader:
                         # print teste
                         print(f"{token.value}\n", end='')
 
+    # Procedimento para escrever num ficheiro html as colunas lidas do ficheiro de texto
+    # Recebe o filename do ficheiro de texto
     def html(self, filename):
         f = open("file.html", "w")
         self.lexer.input(slurp(filename))
@@ -138,6 +149,8 @@ class Reader:
         f.close()
         webbrowser.open_new_tab("file.html")
 
+    # Procedimento para escrever num ficheiro .tex (Latex) as colunas lidas do ficheiro de texto
+    # Recebe o filename do ficheiro de texto
     def latex(self, filename):
         f = open("file.tex", "w")
         self.lexer.input(slurp(filename))
