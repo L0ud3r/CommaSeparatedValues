@@ -61,22 +61,23 @@ class Reader:
         exit(1)
 
     # to fix (decidir se o input do user na consola vira atributo da classe
-    def __init__(self):
+    def __init__(self, filename):
         self.lexer = None
+        self.filename = filename
 
     @staticmethod
-    def builder(**kwargs):
-        obje = Reader()
+    def builder(filename, **kwargs):
+        obje = Reader(filename)
         obje.lexer = lex.lex(module=obje, **kwargs)
         return obje
 
     # Procedimento para printar as colunas lidas do ficheiro de texto
     # Recebe o filename do ficheiro de texto
-    def print(self, filename):
+    def print(self):
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
         headers = ("COUNTRY", "CAPITAL", "CURRENCY", "LANGUAGE")
-        self.lexer.input(slurp(filename))
+        self.lexer.input(slurp(self.filename))
 
         # PARA DEIXAR A PRINTAR COMO ANTES COPIAR TUDO O QUE ESTA DENTRO DO if value not in list:
         if value not in headers:
@@ -102,9 +103,9 @@ class Reader:
 
     # Procedimento para escrever num ficheiro html as colunas lidas do ficheiro de texto
     # Recebe o filename do ficheiro de texto
-    def html(self, filename):
+    def html(self):
         f = open("file.html", "w")
-        self.lexer.input(slurp(filename))
+        self.lexer.input(slurp(self.filename))
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
 
@@ -151,9 +152,9 @@ class Reader:
 
     # Procedimento para escrever num ficheiro .tex (Latex) as colunas lidas do ficheiro de texto
     # Recebe o filename do ficheiro de texto
-    def latex(self, filename):
+    def latex(self):
         f = open("file.tex", "w")
-        self.lexer.input(slurp(filename))
+        self.lexer.input(slurp(self.filename))
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
 

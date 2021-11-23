@@ -7,10 +7,10 @@
 from reader import Reader
 
 # Construção do objeto Reader
-leitura = Reader.builder()
+leitura = Reader.builder("list1.csv")
 # Mostrar resultados em consola
-leitura.print("list1.csv")
+leitura.print()
 # Mostrar resultados em uma tabela HTML
-leitura.html("list1.csv")
+leitura.html()
 # Mostrar resultados em uma tabela LaTex
-leitura.latex("list1.csv")
+leitura.latex()
