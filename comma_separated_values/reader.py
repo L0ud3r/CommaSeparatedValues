@@ -71,6 +71,22 @@ class Reader:
         obje.lexer = lex.lex(module=obje, **kwargs)
         return obje
 
+    def read(self):
+        myDict = {}
+        self.lexer.input(slurp(self.filename))
+        i=0
+        for token in iter(self.lexer.token, None):
+            if i<4:
+                myDict[token.type] = []
+                i+=1
+            else:
+                myDict[token.type].append(token.value)
+        return myDict
+
+
+
+
+
     # Procedimento para printar as colunas lidas do ficheiro de texto
     # Recebe o filename do ficheiro de texto
     def print(self):

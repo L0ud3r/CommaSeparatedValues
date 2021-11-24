@@ -6,11 +6,15 @@
 
 from reader import Reader
 
+
+
 # Construção do objeto Reader
 leitura = Reader.builder("list1.csv")
+
+myDict = leitura.read()
 # Mostrar resultados em consola
-leitura.print()
+#leitura.print()
 # Mostrar resultados em uma tabela HTML
-leitura.html()
+#leitura.html()
 # Mostrar resultados em uma tabela LaTex
-leitura.latex()
+#leitura.latex()
