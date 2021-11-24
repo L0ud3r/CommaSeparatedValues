@@ -1,9 +1,11 @@
+- Fazer uma função que pegue nos campos do csv e armazene em variáveis
+
 HTML:
 
 
 LaTex:
-Fazer Latex
+
 
 
 HTML & Latex:
-Permitir que utilizador selecione várias colunas (?)
+Permitir que utilizador selecione várias colunas
