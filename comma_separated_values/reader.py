@@ -83,7 +83,7 @@ class Reader:
                 myDict[token.type].append(token.value)
         return myDict
 
-    # Procedimento para printar as colunas lidas do dicionário que é lido pela função read
+    # Procedimento para printar o dicionário que é lido pela função read
     # Recebe o dicionário
     def print(self, dict1):
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
@@ -106,11 +106,11 @@ class Reader:
                 string_final = replace_multiple(x, {'"': '', "\n": ""})
                 print(string_final)
 
-    # Procedimento para escrever num ficheiro html as colunas lidas do ficheiro de texto
-    # Recebe o filename do ficheiro de texto
+    # Procedimento para imprimir num ficheiro HTML o dicionário que é lido pela função read
+    # Recebe o dicionário
     def html(self, dict1):
         f = open("file.html", "w")
-        self.lexer.input(slurp(self.filename))
+
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
 
@@ -152,9 +152,9 @@ class Reader:
 
     # Procedimento para escrever num ficheiro .tex (Latex) as colunas lidas do ficheiro de texto
     # Recebe o filename do ficheiro de texto
-    def latex(self):
+    def latex(self, dict1):
         f = open("file.tex", "w")
-        self.lexer.input(slurp(self.filename))
+
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
 
@@ -167,30 +167,43 @@ class Reader:
         latex = '\documentclass{article}\\begin{document}\\begin{center}\\begin{tabular}{||'
 
         if value not in headers:
+            list_length = len(dict1[getKeyFromIndex(0, dict1)])
             for element in headers:
                 latex += 'c '
             latex += '||} \hline '
 
+            # Printar headers
+            headersLength = len(headers)
             i = 0
-            j = 0
-            for token in iter(self.lexer.token, None):
-                if i < len(headers)-1:
-                    token_final = replace_multiple(token.value, {'"': '', "&": "\\&"})
-                    latex += f"{token_final} & "
-                    i += 1
-                elif i == len(headers)-1:
-                    token_final = replace_multiple(token.value, {'"': '', "&": "\\&"})
-                    latex += f"{token_final} \\\\ [0.5ex] \hline \hline"
-                    i += 1
+
+            for key in dict1:
+                if i<headersLength-1:
+                    string_final = replace_multiple(key, {'"': '', "&": "\\&"})
+                    latex += f"{string_final} & "
                 else:
-                    if j<len(headers)-1:
-                        token_final = replace_multiple(token.value, {'"': '', "&": "\\&"})
-                        latex += f"{token_final} & "
-                        j += 1
-                    elif j == len(headers)-1:
-                        token_final = replace_multiple(token.value, {'"': '', "&": "\\&"})
-                        latex += f"{token_final} \\\\ \hline"
-                        j = 0
+                    string_final = replace_multiple(key, {'"': '', "&": "\\&"})
+                    latex += f"{string_final} \\\\ [0.5ex] \hline \hline "
+                i+=1
+
+            # Printar linhas
+
+            valueIndex = 0
+            while valueIndex < list_length:
+                keyIndex = 0
+                while keyIndex < 4:
+                    if keyIndex < 3:
+                        string_final = dict1[getKeyFromIndex(keyIndex, dict1)][valueIndex]
+                        string_final = replace_multiple(string_final, {'"': '', "\n": "", "&": "\\&"})
+                        latex += f"{string_final} & "
+                        keyIndex += 1
+                    else:
+                        string_final = dict1[getKeyFromIndex(keyIndex, dict1)][valueIndex]
+                        string_final = replace_multiple(string_final, {'"': '', "\n": "", "&": "\\&"})
+                        latex += f"{string_final} \\\\ \hline "
+                        keyIndex += 1
+                valueIndex += 1
+
+        #TO-DO
         else:
             latex += 'c ||} \hline '
             i = 0
