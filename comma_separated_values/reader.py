@@ -94,7 +94,6 @@ class Reader:
             if element == "NEWLINE":
                 headers.remove(element)
 
-        # PARA DEIXAR A PRINTAR COMO ANTES COPIAR TUDO O QUE ESTA DENTRO DO if value not in list:
         if value not in headers:
             for key in dict1:
                 print(key)

@@ -17,16 +17,14 @@ def slurp(filename):
 # Dic = dicionário com os items a substituir {item_a_substituir: substituição, item_a_substituir2: substituição;}
 # Retorna o texto com os replaces aplicados
 def replace_multiple(text, dic):
-    for i,j in dic.items():
+    for i, j in dic.items():
         text = text.replace(i, j)
     return text
 
 
-
 def getKeyFromIndex(index, dict):
-    i=0
+    i = 0
     for key in dict:
         if i == index:
             return key
-        i+=1
-
+        i += 1
