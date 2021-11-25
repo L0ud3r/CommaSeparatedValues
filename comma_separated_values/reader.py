@@ -83,12 +83,8 @@ class Reader:
                 myDict[token.type].append(token.value)
         return myDict
 
-
-
-
-
-    # Procedimento para printar as colunas lidas do ficheiro de texto
-    # Recebe o filename do ficheiro de texto
+    # Procedimento para printar as colunas lidas do dicionário que é lido pela função read
+    # Recebe o dicionário
     def print(self, dict1):
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
