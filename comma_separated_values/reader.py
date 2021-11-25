@@ -89,33 +89,20 @@ class Reader:
 
     # Procedimento para printar as colunas lidas do ficheiro de texto
     # Recebe o filename do ficheiro de texto
-    def print(self):
+    def print(self, dict1):
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
         headers = ("COUNTRY", "CAPITAL", "CURRENCY", "LANGUAGE")
-        self.lexer.input(slurp(self.filename))
 
         # PARA DEIXAR A PRINTAR COMO ANTES COPIAR TUDO O QUE ESTA DENTRO DO if value not in list:
         if value not in headers:
-            i = 0
-            for token in iter(self.lexer.token, None):
-                if i < 4:
-                    i += 1
-                else:
-                    # print teste
-                    print(f"{token.value}\t", end='')
+            for key in dict1:
+                print(key)
+                for x in dict1[key]:
+                    print(x.replace("\n", ""))
         else:
-            i = 0
-            for token in iter(self.lexer.token, None):
-                if i < 4:
-                    i += 1
-                else:
-                    if value == token.type:
-                        # Remover \n do inicio dos tokens.type COUNTRY
-                        if token.type == "COUNTRY":
-                            token.value = token.value.replace('\n','')
-                        # print teste
-                        print(f"{token.value}\n", end='')
+            for x in dict1[value]:
+                print(x.replace("\n", ""))
 
     # Procedimento para escrever num ficheiro html as colunas lidas do ficheiro de texto
     # Recebe o filename do ficheiro de texto

@@ -13,7 +13,7 @@ leitura = Reader.builder("list1.csv")
 
 myDict = leitura.read()
 # Mostrar resultados em consola
-#leitura.print()
+leitura.print(myDict)
 # Mostrar resultados em uma tabela HTML
 #leitura.html()
 # Mostrar resultados em uma tabela LaTex
