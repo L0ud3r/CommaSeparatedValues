@@ -2,7 +2,7 @@
 import webbrowser
 
 import ply.lex as lex
-from my_utils import slurp, replace_multiple
+from my_utils import slurp, replace_multiple, getKeyFromIndex
 
 
 class Reader:
@@ -88,21 +88,28 @@ class Reader:
     def print(self, dict1):
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
-        headers = ("COUNTRY", "CAPITAL", "CURRENCY", "LANGUAGE")
+        headers = [member for member in self.tokens]
+
+        for element in headers:
+            if element == "NEWLINE":
+                headers.remove(element)
 
         # PARA DEIXAR A PRINTAR COMO ANTES COPIAR TUDO O QUE ESTA DENTRO DO if value not in list:
         if value not in headers:
             for key in dict1:
                 print(key)
                 for x in dict1[key]:
-                    print(x.replace("\n", ""))
+                    string_final = replace_multiple(x, {'"': '', "\n": ""})
+                    print(string_final)
         else:
+            print(value)
             for x in dict1[value]:
-                print(x.replace("\n", ""))
+                string_final = replace_multiple(x, {'"': '', "\n": ""})
+                print(string_final)
 
     # Procedimento para escrever num ficheiro html as colunas lidas do ficheiro de texto
     # Recebe o filename do ficheiro de texto
-    def html(self):
+    def html(self, dict1):
         f = open("file.html", "w")
         self.lexer.input(slurp(self.filename))
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
@@ -117,32 +124,27 @@ class Reader:
         html = '<html><head><link rel="stylesheet" href="styles.css"></head><body><table><tr>'
 
         if value not in headers:
-            i = 0
-            j = 0
-            for token in iter(self.lexer.token, None):
-                if i < len(headers):
-                    i += 1
-                    token_final = token.value.replace('"', '')
-                    html += f"<th>{token_final}</th>"
-                    if i == len(headers):
-                        html += "</tr>"
-                        i += 1
-                else:
-                    if j == len(headers):
-                        html += "</tr><tr>"
-                        j = 0
-                    token_final = token.value.replace('"', '')
-                    html += f"<td>{token_final}</td>"
-                    j += 1
+            list_length = len(dict1[getKeyFromIndex(0, dict1)])
+            for key in dict1:
+                html += f"<th>{key}</th>"
+
+            html+="</tr>"
+            valueIndex = 0
+            while valueIndex < list_length:
+                keyIndex = 0
+                html += "</tr><tr>"
+                while keyIndex < 4:
+                    string_final = dict1[getKeyFromIndex(keyIndex, dict1)][valueIndex]
+                    string_final = replace_multiple(string_final, {'"': '', "\n": ""})
+                    html += f"<td>{string_final}</td>"
+                    keyIndex += 1
+                valueIndex += 1
+
         else:
-            i = 0
-            for token in iter(self.lexer.token, None):
-                if value == token.type:
-                    if i < 1:
-                        html += f"<th>{token.value}</th></tr>"
-                        i += 1
-                    else:
-                        html += f"</tr><tr><td>{token.value}</td>"
+            html+=f"<th>{value}</th></tr>"
+            for x in dict1[value]:
+                string_final = replace_multiple(x, {'"': '', "\n": ""})
+                html+=f"</tr><tr><td>{string_final}</td>"
 
         html += "</table></body></html>"
         f.write(html)

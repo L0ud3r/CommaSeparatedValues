@@ -15,6 +15,6 @@ myDict = leitura.read()
 # Mostrar resultados em consola
 leitura.print(myDict)
 # Mostrar resultados em uma tabela HTML
-#leitura.html()
+leitura.html(myDict)
 # Mostrar resultados em uma tabela LaTex
 #leitura.latex()
