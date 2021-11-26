@@ -173,11 +173,11 @@ class Reader:
             latex += '||} \hline '
 
             # Printar headers
-            headersLength = len(headers)
+            headers_length = len(headers)
             i = 0
 
             for key in dict1:
-                if i<headersLength-1:
+                if i < headers_length-1:
                     string_final = replace_multiple(key, {'"': '', "&": "\\&"})
                     latex += f"{string_final} & "
                 else:
@@ -187,35 +187,29 @@ class Reader:
 
             # Printar linhas
 
-            valueIndex = 0
-            while valueIndex < list_length:
+            value_index = 0
+            while value_index < list_length:
                 keyIndex = 0
                 while keyIndex < 4:
                     if keyIndex < 3:
-                        string_final = dict1[getKeyFromIndex(keyIndex, dict1)][valueIndex]
+                        string_final = dict1[getKeyFromIndex(keyIndex, dict1)][value_index]
                         string_final = replace_multiple(string_final, {'"': '', "\n": "", "&": "\\&"})
                         latex += f"{string_final} & "
                         keyIndex += 1
                     else:
-                        string_final = dict1[getKeyFromIndex(keyIndex, dict1)][valueIndex]
+                        string_final = dict1[getKeyFromIndex(keyIndex, dict1)][value_index]
                         string_final = replace_multiple(string_final, {'"': '', "\n": "", "&": "\\&"})
                         latex += f"{string_final} \\\\ \hline "
                         keyIndex += 1
-                valueIndex += 1
+                value_index += 1
 
-        #TO-DO
         else:
             latex += 'c ||} \hline '
-            i = 0
-            for token in iter(self.lexer.token, None):
-                if value == token.type:
-                    if i < 1:
-                        token_final = replace_multiple(token.value, {'"': '', "&": "\\&"})
-                        latex += f"{token_final}\\\\[0.5ex] \hline\hline "
-                        i += 1
-                    else:
-                        token_final = replace_multiple(token.value, {'"': '', "&": "\\&"})
-                        latex += f"{token_final} \\\\ \hline "
+            latex+= f"{value}\\\\[0.5ex] \hline\hline "
+            for x in dict1[value]:
+                string_final = replace_multiple(x, {'"': '', "&": "\\&"})
+                latex += f"{string_final} \\\\ \hline "
+
 
         latex += "\end{tabular}\end{center}\end{document}"
         f.write(latex)
