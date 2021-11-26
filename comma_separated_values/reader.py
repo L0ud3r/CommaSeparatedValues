@@ -201,10 +201,18 @@ class Reader:
     # Procedimento para escrever num ficheiro .tex (Latex) as colunas lidas do ficheiro de texto
     # Recebe o filename do ficheiro de texto
     def latex(self, dict1):
+
+
+
+
         f = open("file.tex", "w")
 
+        value_list = []
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
+
+        if "," in value:
+            value_list = value.split(",")
 
         headers = [member for member in self.tokens]
 
@@ -214,7 +222,47 @@ class Reader:
 
         latex = '\documentclass{article}\\begin{document}\\begin{center}\\begin{tabular}{||'
 
-        if value not in headers:
+        if value_list:
+
+            for value_single in value_list:
+                latex += 'c '
+            latex += '||} \hline '
+
+            key_indexes = []
+            list_length = len(dict1[getKeyFromIndex(0, dict1)])
+            i = 0
+            for value_single in value_list:
+                j = 0
+                for key in dict1:
+
+                    if (key == value_single) & (i<len(value_list)-1):
+                        key_indexes.append(j)
+                        latex += f"{key} & "
+                        i += 1
+                    elif key == value_single:
+                        key_indexes.append(j)
+                        latex += f"{key} \\\\ [0.5ex] \hline \hline "
+                        i += 1
+                    j += 1
+
+            key_indexes_size = len(key_indexes)
+
+            value_index = 0
+
+            while value_index < list_length:
+                key_index = 0
+                while key_index < key_indexes_size-1:
+                    string_final = dict1[getKeyFromIndex(key_indexes[key_index], dict1)][value_index]
+                    string_final = replace_multiple(string_final, {'"': '', "&": "\\&","\n": ""})
+                    latex += f"{string_final} & "
+                    key_index += 1
+                if key_index == key_indexes_size-1:
+                    string_final = dict1[getKeyFromIndex(key_indexes[key_index], dict1)][value_index]
+                    string_final = replace_multiple(string_final, {'"': '', "&": "\\&", "\n": ""})
+                    latex += f"{string_final} \\\\ \hline "
+                value_index += 1
+                
+        elif value not in headers:
             list_length = len(dict1[getKeyFromIndex(0, dict1)])
             for element in headers:
                 latex += 'c '
@@ -226,10 +274,10 @@ class Reader:
 
             for key in dict1:
                 if i < headers_length-1:
-                    string_final = replace_multiple(key, {'"': '', "&": "\\&"})
+                    string_final = replace_multiple(key, {'"': '', "&": "\\&", "\n": ""})
                     latex += f"{string_final} & "
                 else:
-                    string_final = replace_multiple(key, {'"': '', "&": "\\&"})
+                    string_final = replace_multiple(key, {'"': '', "&": "\\&", "\n": ""})
                     latex += f"{string_final} \\\\ [0.5ex] \hline \hline "
                 i+=1
 
