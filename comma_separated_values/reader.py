@@ -170,13 +170,12 @@ class Reader:
 
             html += "</tr>"
 
-
         elif value not in headers:
             list_length = len(dict1[getKeyFromIndex(0, dict1)])
             for key in dict1:
                 html += f"<th>{key}</th>"
 
-            html+="</tr>"
+            html += "</tr>"
             value_index = 0
             while value_index < list_length:
                 key_index = 0
