@@ -155,18 +155,18 @@ class Reader:
             html += "</tr>"
             key_indexes_size = len(key_indexes)
 
-            i = 0
+            value_index = 0
 
-            while i < list_length:
-                j = 0
+            while value_index < list_length:
+                key_index = 0
                 html += "</tr><tr>"
-                while j < key_indexes_size:
-                    string_final = dict1[getKeyFromIndex(key_indexes[j], dict1)][i]
+                while key_index < key_indexes_size:
+                    string_final = dict1[getKeyFromIndex(key_indexes[key_index], dict1)][value_index]
                     string_final = replace_multiple(string_final, {'"': '', "\n": ""})
                     html += f"<td>{string_final}</td>"
-                    j += 1
+                    key_index += 1
 
-                i += 1
+                value_index += 1
 
             html += "</tr>"
 
