@@ -126,8 +126,12 @@ class Reader:
     def html(self, dict1):
         f = open("file.html", "w")
 
+        value_list = []
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
+
+        if "," in value:
+            value_list = value.split(",")
 
         headers = [member for member in self.tokens]
 
@@ -137,28 +141,58 @@ class Reader:
 
         html = '<html><head><link rel="stylesheet" href="styles.css"></head><body><table><tr>'
 
-        if value not in headers:
+        if value_list:
+            key_indexes = []
+            list_length = len(dict1[getKeyFromIndex(0, dict1)])
+            for value_single in value_list:
+                i = 0
+                for key in dict1:
+                    if key == value_single:
+                        key_indexes.append(i)
+                        html += f"<th>{key}</th>"
+                    i+=1
+
+            html += "</tr>"
+            key_indexes_size = len(key_indexes)
+
+            i = 0
+
+            while i < list_length:
+                j = 0
+                html += "</tr><tr>"
+                while j < key_indexes_size:
+                    string_final = dict1[getKeyFromIndex(key_indexes[j], dict1)][i]
+                    string_final = replace_multiple(string_final, {'"': '', "\n": ""})
+                    html += f"<td>{string_final}</td>"
+                    j += 1
+
+                i += 1
+
+            html += "</tr>"
+
+
+        elif value not in headers:
             list_length = len(dict1[getKeyFromIndex(0, dict1)])
             for key in dict1:
                 html += f"<th>{key}</th>"
 
             html+="</tr>"
-            valueIndex = 0
-            while valueIndex < list_length:
-                keyIndex = 0
+            value_index = 0
+            while value_index < list_length:
+                key_index = 0
                 html += "</tr><tr>"
-                while keyIndex < 4:
-                    string_final = dict1[getKeyFromIndex(keyIndex, dict1)][valueIndex]
+                while key_index < 4:
+                    string_final = dict1[getKeyFromIndex(key_index, dict1)][value_index]
                     string_final = replace_multiple(string_final, {'"': '', "\n": ""})
                     html += f"<td>{string_final}</td>"
-                    keyIndex += 1
-                valueIndex += 1
+                    key_index += 1
+                value_index += 1
 
         else:
-            html+=f"<th>{value}</th></tr>"
+            html += f"<th>{value}</th></tr>"
             for x in dict1[value]:
                 string_final = replace_multiple(x, {'"': '', "\n": ""})
-                html+=f"</tr><tr><td>{string_final}</td>"
+                html += f"</tr><tr><td>{string_final}</td>"
 
         html += "</table></body></html>"
         f.write(html)
