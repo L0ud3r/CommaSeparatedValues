@@ -86,16 +86,31 @@ class Reader:
     # Procedimento para printar o dicionário que é lido pela função read
     # Recebe o dicionário
     def print(self, dict1):
+        value_list = []
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
+        if "," in value:
+            value_list = value.split(",")
+
         headers = [member for member in self.tokens]
 
         for element in headers:
             if element == "NEWLINE":
                 headers.remove(element)
 
-        if value not in headers:
+        if value_list:
+            for value_single in value_list:
+                for key in dict1:
+                    if key == value_single:
+                        # Passar isto para função a parte para não repetir?
+                        print(key)
+                        for x in dict1[key]:
+                            string_final = replace_multiple(x, {'"': '', "\n": ""})
+                            print(string_final)
+
+        elif value not in headers:
             for key in dict1:
+                # Passar isto para função à parte para não repetir?
                 print(key)
                 for x in dict1[key]:
                     string_final = replace_multiple(x, {'"': '', "\n": ""})
