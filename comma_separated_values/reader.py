@@ -72,16 +72,16 @@ class Reader:
         return obje
 
     def read(self):
-        myDict = {}
+        my_dict = {}
         self.lexer.input(slurp(self.filename))
         i=0
         for token in iter(self.lexer.token, None):
             if i<4:
-                myDict[token.type] = []
+                my_dict[token.type] = []
                 i+=1
             else:
-                myDict[token.type].append(token.value)
-        return myDict
+                my_dict[token.type].append(token.value)
+        return my_dict
 
     # Procedimento para printar o dicionário que é lido pela função read
     # Recebe o dicionário
@@ -150,7 +150,7 @@ class Reader:
                     if key == value_single:
                         key_indexes.append(i)
                         html += f"<th>{key}</th>"
-                    i+=1
+                    i += 1
 
             html += "</tr>"
             key_indexes_size = len(key_indexes)
@@ -237,23 +237,23 @@ class Reader:
 
             value_index = 0
             while value_index < list_length:
-                keyIndex = 0
-                while keyIndex < 4:
-                    if keyIndex < 3:
-                        string_final = dict1[getKeyFromIndex(keyIndex, dict1)][value_index]
+                key_index = 0
+                while key_index < 4:
+                    if key_index < 3:
+                        string_final = dict1[getKeyFromIndex(key_index, dict1)][value_index]
                         string_final = replace_multiple(string_final, {'"': '', "\n": "", "&": "\\&"})
                         latex += f"{string_final} & "
-                        keyIndex += 1
+                        key_index += 1
                     else:
-                        string_final = dict1[getKeyFromIndex(keyIndex, dict1)][value_index]
+                        string_final = dict1[getKeyFromIndex(key_index, dict1)][value_index]
                         string_final = replace_multiple(string_final, {'"': '', "\n": "", "&": "\\&"})
                         latex += f"{string_final} \\\\ \hline "
-                        keyIndex += 1
+                        key_index += 1
                 value_index += 1
 
         else:
             latex += 'c ||} \hline '
-            latex+= f"{value}\\\\[0.5ex] \hline\hline "
+            latex += f"{value}\\\\[0.5ex] \hline\hline "
             for x in dict1[value]:
                 string_final = replace_multiple(x, {'"': '', "&": "\\&"})
                 latex += f"{string_final} \\\\ \hline "
