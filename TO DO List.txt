@@ -1,7 +1,6 @@
-LaTex:
-Latex from variables
-
-
-
-Print & HTML & Latex:
+Latex:
 Permitir que utilizador selecione várias colunas
+
+Cenas opcionais:
+- Procurar um país e devolver as suas informações
+- outras pesquisas
