@@ -5,6 +5,7 @@
 # uma tabela csv, html ou mesmo resutados em consola dos dados pedidos
 
 from reader import Reader
+from my_utils import printCountryShowStuff
 
 
 
@@ -20,10 +21,18 @@ OUTROS:
 
 print(menu)
 
+
+
 #input from menu
 
 
 myDict = leitura.read()
+
+
+#ver se um country existe, se existe, printar infos (para usar no Menu!)
+printCountryShowStuff("Portugal", myDict)
+
+
 # Mostrar resultados em consola
 leitura.print(myDict)
 # Mostrar resultados em uma tabela HTML

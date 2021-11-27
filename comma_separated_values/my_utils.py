@@ -22,9 +22,22 @@ def replace_multiple(text, dic):
     return text
 
 
-def getKeyFromIndex(index, dict):
+def getKeyFromIndex(index, dict_received):
     i = 0
-    for key in dict:
+    for key in dict_received:
         if i == index:
             return key
         i += 1
+
+def printCountryShowStuff(country, dict_received):
+    country = "\n" + country
+    if country in dict_received["COUNTRY"]:
+        i = 0
+        while i < len(dict_received["COUNTRY"]):
+            if country == dict_received["COUNTRY"][i]:
+                country_index = i
+            i += 1
+        for key in dict_received:
+            print(dict_received[key][country_index])
+    else:
+        print(f"{country} não existe.")
