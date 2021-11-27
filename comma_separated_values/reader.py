@@ -261,7 +261,7 @@ class Reader:
                     string_final = replace_multiple(string_final, {'"': '', "&": "\\&", "\n": ""})
                     latex += f"{string_final} \\\\ \hline "
                 value_index += 1
-                
+
         elif value not in headers:
             list_length = len(dict1[getKeyFromIndex(0, dict1)])
             for element in headers:
