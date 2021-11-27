@@ -86,9 +86,14 @@ class Reader:
     # Procedimento para printar o dicionário que é lido pela função read
     # Recebe o dicionário
     def print(self, dict1):
+        # Inicializar lista que será usada caso o utilizador use virgulas para selecionar as colunas
         value_list = []
+
+        # Input do utilizador
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
+
+        # Caso existam virgulas no input, o input é dividido para a lista
         if "," in value:
             value_list = value.split(",")
 
@@ -98,6 +103,7 @@ class Reader:
             if element == "NEWLINE":
                 headers.remove(element)
 
+        # Caso a value_list não esteja vazia (printa colunas escolhidas pelo user)
         if value_list:
             for value_single in value_list:
                 for key in dict1:
@@ -108,6 +114,7 @@ class Reader:
                             string_final = replace_multiple(x, {'"': '', "\n": ""})
                             print(string_final)
 
+        # Caso o input do user não exista nos headers (printa todas as colunas)
         elif value not in headers:
             for key in dict1:
                 # Passar isto para função à parte para não repetir?
@@ -115,6 +122,8 @@ class Reader:
                 for x in dict1[key]:
                     string_final = replace_multiple(x, {'"': '', "\n": ""})
                     print(string_final)
+
+        # Caso o utilizador tenha inserido apenas o nome de uma coluna (printa apenas uma coluna)
         else:
             print(value)
             for x in dict1[value]:
@@ -126,10 +135,14 @@ class Reader:
     def html(self, dict1):
         f = open("file.html", "w")
 
+        # Inicializar lista que será usada caso o utilizador use virgulas para selecionar as colunas
         value_list = []
+
+        # Input do utilizador
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
 
+        # Caso existam virgulas no input, o input é dividido para a lista
         if "," in value:
             value_list = value.split(",")
 
@@ -141,6 +154,7 @@ class Reader:
 
         html = '<html><head><link rel="stylesheet" href="styles.css"></head><body><table><tr>'
 
+        # Caso a value_list não esteja vazia (imprime colunas escolhidas pelo user)
         if value_list:
             key_indexes = []
             list_length = len(dict1[getKeyFromIndex(0, dict1)])
@@ -170,6 +184,7 @@ class Reader:
 
             html += "</tr>"
 
+        # Caso o input do user não exista nos headers (imprime todas as colunas)
         elif value not in headers:
             list_length = len(dict1[getKeyFromIndex(0, dict1)])
             for key in dict1:
@@ -187,6 +202,7 @@ class Reader:
                     key_index += 1
                 value_index += 1
 
+        # Caso o utilizador tenha inserido apenas o nome de uma coluna (imprime apenas uma coluna)
         else:
             html += f"<th>{value}</th></tr>"
             for x in dict1[value]:
@@ -202,15 +218,16 @@ class Reader:
     # Recebe o filename do ficheiro de texto
     def latex(self, dict1):
 
-
-
-
         f = open("file.tex", "w")
 
+        # Inicializar lista que será usada caso o utilizador use virgulas para selecionar as colunas
         value_list = []
+
+        # Input do utilizador
         value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
                       "Caso contrário insira um token:  ").upper()
 
+        # Caso existam virgulas no input, o input é dividido para a lista
         if "," in value:
             value_list = value.split(",")
 
@@ -222,6 +239,7 @@ class Reader:
 
         latex = '\documentclass{article}\\begin{document}\\begin{center}\\begin{tabular}{||'
 
+        # Caso a value_list não esteja vazia (imprime colunas escolhidas pelo user)
         if value_list:
 
             for value_single in value_list:
@@ -262,6 +280,7 @@ class Reader:
                     latex += f"{string_final} \\\\ \hline "
                 value_index += 1
 
+        # Caso o input do user não exista nos headers (imprime todas as colunas)
         elif value not in headers:
             list_length = len(dict1[getKeyFromIndex(0, dict1)])
             for element in headers:
@@ -299,6 +318,7 @@ class Reader:
                         key_index += 1
                 value_index += 1
 
+        # Caso o utilizador tenha inserido apenas o nome de uma coluna (imprime apenas uma coluna)
         else:
             latex += 'c ||} \hline '
             latex += f"{value}\\\\[0.5ex] \hline\hline "
