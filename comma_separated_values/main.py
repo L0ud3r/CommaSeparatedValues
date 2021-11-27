@@ -11,6 +11,18 @@ from reader import Reader
 # Construção do objeto Reader
 leitura = Reader.builder("list1.csv")
 
+menu = """Bem-vindo
+1 - Print
+2 - HTML
+3 - Latex
+OUTROS:
+4 - Verificar se um país existe, se sim, mostrar as suas informações"""
+
+print(menu)
+
+#input from menu
+
+
 myDict = leitura.read()
 # Mostrar resultados em consola
 leitura.print(myDict)
