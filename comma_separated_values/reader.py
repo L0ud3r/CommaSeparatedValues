@@ -213,6 +213,7 @@ class Reader:
         f.write(html)
         f.close()
         webbrowser.open_new_tab("file.html")
+        print("Documento HTML gerado com sucesso!")
 
     # Procedimento para escrever num ficheiro .tex (Latex) as colunas lidas do ficheiro de texto
     # Recebe o filename do ficheiro de texto
@@ -301,7 +302,6 @@ class Reader:
                 i+=1
 
             # Printar linhas
-
             value_index = 0
             while value_index < list_length:
                 key_index = 0
@@ -326,8 +326,8 @@ class Reader:
                 string_final = replace_multiple(x, {'"': '', "&": "\\&"})
                 latex += f"{string_final} \\\\ \hline "
 
-
         latex += "\end{tabular}\end{center}\end{document}"
         f.write(latex)
         f.close()
         webbrowser.open_new_tab("file.tex")
+        print("Documento LaTex gerado com sucesso!")

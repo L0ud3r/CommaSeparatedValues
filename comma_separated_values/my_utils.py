@@ -29,6 +29,7 @@ def getKeyFromIndex(index, dict_received):
             return key
         i += 1
 
+
 def printCountryShowStuff(country, dict_received):
     country = "\n" + country
     if country in dict_received["COUNTRY"]:

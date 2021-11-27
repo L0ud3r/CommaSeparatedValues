@@ -6,36 +6,21 @@
 
 from reader import Reader
 from my_utils import printCountryShowStuff
-
-
-
+from menu import menu, get_country
 # Construção do objeto Reader
 leitura = Reader.builder("list1.csv")
 
-menu = """Bem-vindo
-1 - Print
-2 - HTML
-3 - Latex
-OUTROS:
-4 - Verificar se um país existe, se sim, mostrar as suas informações"""
-
-print(menu)
-
-
-
-#input from menu
-
-
+# Leitura dos dados da tabela CSV
 myDict = leitura.read()
 
+option = menu()
 
-#ver se um country existe, se existe, printar infos (para usar no Menu!)
-printCountryShowStuff("Portugal", myDict)
-
-
-# Mostrar resultados em consola
-leitura.print(myDict)
-# Mostrar resultados em uma tabela HTML
-leitura.html(myDict)
-# Mostrar resultados em uma tabela LaTex
-leitura.latex(myDict)
+if option == 1:
+    leitura.print(myDict)
+elif option == 2:
+    leitura.html(myDict)
+elif option == 3:
+    leitura.latex(myDict)
+elif option == 4:
+    pais = get_country()
+    printCountryShowStuff(pais, myDict)
