@@ -1,3 +1,6 @@
+To-Do:
+Menu
+
 Cenas opcionais:
 - Procurar um país e devolver as suas informações
 - outras pesquisas
