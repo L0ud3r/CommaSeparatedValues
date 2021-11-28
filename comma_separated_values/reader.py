@@ -60,17 +60,19 @@ class Reader:
         print(f"Unexpected token: {t.value[:20]}")
         exit(1)
 
-    # to fix (decidir se o input do user na consola vira atributo da classe
+    # Inicializador do objeto
     def __init__(self, filename):
         self.lexer = None
         self.filename = filename
 
+    # Construtor
     @staticmethod
     def builder(filename, **kwargs):
         obje = Reader(filename)
         obje.lexer = lex.lex(module=obje, **kwargs)
         return obje
 
+    # Função de leitura do doc csv, armazenando o conteudo numa dictionary
     def read(self):
         my_dict = {}
         self.lexer.input(slurp(self.filename))

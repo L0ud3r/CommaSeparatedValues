@@ -21,7 +21,7 @@ def replace_multiple(text, dic):
         text = text.replace(i, j)
     return text
 
-
+# Obtem a chave de uma dictionary a partir do index
 def getKeyFromIndex(index, dict_received):
     i = 0
     for key in dict_received:
@@ -29,7 +29,8 @@ def getKeyFromIndex(index, dict_received):
             return key
         i += 1
 
-
+# Recebendo o input do user de um pais, verifica se este exisqte, se sim
+# printa as suas informacoes
 def printCountryShowStuff(country, dict_received):
     country = "\n" + country
     if country in dict_received["COUNTRY"]:
