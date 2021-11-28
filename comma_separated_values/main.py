@@ -15,12 +15,15 @@ myDict = leitura.read()
 
 option = menu()
 
-if option == 1:
-    leitura.print(myDict)
-elif option == 2:
-    leitura.html(myDict)
-elif option == 3:
-    leitura.latex(myDict)
-elif option == 4:
-    pais = get_country()
-    printCountryShowStuff(pais, myDict)
+while option != -1:
+    if option == 1:
+        leitura.print(myDict)
+    elif option == 2:
+        leitura.html(myDict)
+    elif option == 3:
+        leitura.latex(myDict)
+    elif option == 4:
+        pais = get_country()
+        printCountryShowStuff(pais, myDict)
+    option = menu()
+
