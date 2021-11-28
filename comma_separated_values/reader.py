@@ -105,23 +105,49 @@ class Reader:
 
         # Caso a value_list não esteja vazia (printa colunas escolhidas pelo user)
         if value_list:
+            key_indexes = []
+            list_length = len(dict1[getKeyFromIndex(0, dict1)])
             for value_single in value_list:
+                i = 0
                 for key in dict1:
                     if key == value_single:
-                        # Passar isto para função a parte para não repetir?
-                        print(key)
-                        for x in dict1[key]:
-                            string_final = replace_multiple(x, {'"': '', "\n": ""})
-                            print(string_final)
+                        key_indexes.append(i)
+                        print(key, end="\t")
+                    i+=1
+
+            print()
+            key_indexes_size = len(key_indexes)
+
+            value_index = 0
+
+            while value_index < list_length:
+                key_index = 0
+                while key_index < key_indexes_size:
+                    string_final = dict1[getKeyFromIndex(key_indexes[key_index], dict1)][value_index]
+                    string_final = replace_multiple(string_final, {'"': '', "\n": ""})
+                    print(string_final, end="\t")
+                    key_index += 1
+                print()
+                value_index += 1
+
 
         # Caso o input do user não exista nos headers (printa todas as colunas)
         elif value not in headers:
+            list_length = len(dict1[getKeyFromIndex(0, dict1)])
             for key in dict1:
-                # Passar isto para função à parte para não repetir?
-                print(key)
-                for x in dict1[key]:
-                    string_final = replace_multiple(x, {'"': '', "\n": ""})
-                    print(string_final)
+                print(key, end="\t")
+            print()
+
+            value_index = 0
+            while value_index < list_length:
+                key_index = 0
+                while key_index < 4:
+                    string_final = dict1[getKeyFromIndex(key_index, dict1)][value_index]
+                    string_final = replace_multiple(string_final, {'"': '', "\n": ""})
+                    print(string_final, end="\t")
+                    key_index += 1
+                print()
+                value_index += 1
 
         # Caso o utilizador tenha inserido apenas o nome de uma coluna (printa apenas uma coluna)
         else:

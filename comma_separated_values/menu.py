@@ -10,8 +10,10 @@ def menu():
 
     option = int(input(">> "))
 
-    while option > 4 or option < 1:
-        print(menu)
+
+
+    while (option > 4 or option < 1) and option != -1:
+        print(menutext)
 
         option = int(input(">> "))
 
