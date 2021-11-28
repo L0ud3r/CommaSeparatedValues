@@ -3,7 +3,8 @@ def menu():
 1 - Print
 2 - HTML
 3 - Latex
-4 - Verificar se um país existe, se sim, mostrar as suas informações"""
+4 - Verificar se um país existe, se sim, mostrar as suas informações
+-1 - Sair"""
 
     print(menutext)
 
