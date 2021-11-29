@@ -7,7 +7,7 @@ from my_utils import slurp, replace_multiple, getKeyFromIndex
 
 class Reader:
     # Tokens
-    tokens = ("COUNTRY", "CAPITAL", "CURRENCY", "LANGUAGE", "NEWLINE")
+    tokens = ("COUNTRY", "CAPITAL", "CURRENCY", "LANGUAGE", "COMMENTARY", "NEWLINE")
 
     # States
     states = (
@@ -24,7 +24,7 @@ class Reader:
 
     # Função que serve para reconhecer o campo Country do ficheiro de texto
     def t_COUNTRY(self, t):
-        r"[^,]+"
+        r"([A-Z]|[a-z])[^,]+"
         t.type = "COUNTRY"
         t.lexer.begin("capital")
         return t
@@ -49,6 +49,11 @@ class Reader:
         t.type = "LANGUAGE"
         t.lexer.begin("INITIAL")
         return t
+
+    # Função para reconhecer comentários
+    def t_COMMENTARY(self, t):
+        r"\#[^\n]+"
+        pass
 
     # Função que serve para reconhecer o "parágrafo"/"\n"/nova linha
     def t_NEWLINE(self, t):
@@ -103,6 +108,8 @@ class Reader:
 
         for element in headers:
             if element == "NEWLINE":
+                headers.remove(element)
+            if element == "COMMENTARY":
                 headers.remove(element)
 
         # Caso a value_list não esteja vazia (printa colunas escolhidas pelo user)
@@ -178,6 +185,8 @@ class Reader:
 
         for element in headers:
             if element == "NEWLINE":
+                headers.remove(element)
+            if element == "COMMENTARY":
                 headers.remove(element)
 
         html = '<html><head><link rel="stylesheet" href="styles.css"></head><body><table><tr>'
@@ -264,6 +273,8 @@ class Reader:
 
         for element in headers:
             if element == "NEWLINE":
+                headers.remove(element)
+            if element == "COMMENTARY":
                 headers.remove(element)
 
         latex = '\documentclass{article}\\begin{document}\\begin{center}\\begin{tabular}{||'
