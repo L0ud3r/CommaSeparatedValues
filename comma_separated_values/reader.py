@@ -1,5 +1,4 @@
 # reader.py
-import webbrowser
 
 import ply.lex as lex
 from my_utils import slurp, replace_multiple, getKeyFromIndex

@@ -8,6 +8,7 @@ from reader import Reader
 from my_utils import printCountryShowStuff
 from menu import menu, get_country
 from printer import values_print, values_to_html, values_to_latex
+
 # Construção do objeto Reader
 leitura = Reader.builder("list1.csv")
 
