@@ -32,7 +32,6 @@ def getKeyFromIndex(index, dict_received):
 # Recebendo o input do user de um pais, verifica se este exisqte, se sim
 # printa as suas informacoes
 def printCountryShowStuff(country, dict_received):
-    country = "\n" + country
     if country in dict_received["COUNTRY"]:
         i = 0
         while i < len(dict_received["COUNTRY"]):
