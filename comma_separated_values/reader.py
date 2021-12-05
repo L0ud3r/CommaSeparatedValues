@@ -81,9 +81,18 @@ class Reader:
     def read(self):
         my_dict = {}
         self.lexer.input(slurp(self.filename))
+
+        headers = [member for member in self.tokens]
+
+        for element in headers:
+            if element == "NEWLINE":
+                headers.remove(element)
+            if element == "COMMENTARY":
+                headers.remove(element)
+
         i=0
         for token in iter(self.lexer.token, None):
-            if i<4:
+            if i< len(headers):
                 my_dict[token.type] = []
                 i+=1
             else:
