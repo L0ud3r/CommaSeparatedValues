@@ -85,7 +85,7 @@ class Reader:
 
         i=0
         for token in iter(self.lexer.token, None):
-            if i< len(headers):
+            if i < len(headers):
                 my_dict[token.type] = []
                 i+=1
             else:
