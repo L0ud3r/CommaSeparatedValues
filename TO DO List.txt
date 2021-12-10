@@ -1,2 +1,2 @@
 To-Do:
-Print colunas
+Reader genérico
