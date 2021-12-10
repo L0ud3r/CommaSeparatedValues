@@ -14,7 +14,7 @@ def slurp(filename):
 
 # Função replace_multiple serve para dar replace a múltiplos caracteres ou sub-strings dentro de uma string
 # Text = string onde vai ser feito o tal replace
-# Dic = dicionário com os items a substituir {item_a_substituir: substituição, item_a_substituir2: substituição;}
+# Dic = dicionário com os items a substituir {item_a_substituir: substituição, item_a_substituir2: substituição}
 # Retorna o texto com os replaces aplicados
 def replace_multiple(text, dic):
     for i, j in dic.items():
@@ -37,6 +37,7 @@ def printCountryShowStuff(country, dict_received):
         while i < len(dict_received["COUNTRY"]):
             if country == dict_received["COUNTRY"][i]:
                 country_index = i
+                break
             i += 1
         for key in dict_received:
             print(dict_received[key][country_index])

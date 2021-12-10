@@ -57,7 +57,7 @@ def values_print(dict1):
         value_index = 0
         while value_index < list_length:
             key_index = 0
-            while key_index < 4:
+            while key_index < len(headers):
                 string_final = dict1[getKeyFromIndex(key_index, dict1)][value_index]
                 string_final = replace_multiple(string_final, {'"': '', "\n": ""})
                 print(string_final, end="\t")
@@ -134,7 +134,7 @@ def values_to_html(dict1):
         while value_index < list_length:
             key_index = 0
             html += "</tr><tr>"
-            while key_index < 4:
+            while key_index < len(headers):
                 string_final = dict1[getKeyFromIndex(key_index, dict1)][value_index]
                 string_final = replace_multiple(string_final, {'"': '', "\n": ""})
                 html += f"<td>{string_final}</td>"
@@ -240,8 +240,8 @@ def values_to_latex(dict1):
         value_index = 0
         while value_index < list_length:
             key_index = 0
-            while key_index < 4:
-                if key_index < 3:
+            while key_index < len(headers):
+                if key_index < len(headers)-1:
                     string_final = dict1[getKeyFromIndex(key_index, dict1)][value_index]
                     string_final = replace_multiple(string_final, {'"': '', "\n": "", "&": "\\&"})
                     latex += f"{string_final} & "
