@@ -18,8 +18,3 @@ def menu():
         option = int(input(">> "))
 
     return option
-
-
-def get_country():
-    string = input("Nome do pais: ")
-    return string

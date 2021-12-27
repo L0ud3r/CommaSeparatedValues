@@ -11,7 +11,7 @@ def values_print(dict1):
 
     # Input do utilizador
     value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
-                  "Caso contrário insira um token:  ").upper()
+                  "Caso contrário insira um token:  ")
 
     # Caso existam virgulas no input, o input é dividido para a lista
     if "," in value:
@@ -80,7 +80,7 @@ def values_to_html(dict1):
 
     # Input do utilizador
     value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
-                  "Caso contrário insira um token:  ").upper()
+                  "Caso contrário insira um token:  ")
 
     # Caso existam virgulas no input, o input é dividido para a lista
     if "," in value:
@@ -160,7 +160,7 @@ def values_to_latex(dict1):
 
     # Input do utilizador
     value = input("(Se pretender ver o output da tabela inteira dê enter)\n"
-                  "Caso contrário insira um token:  ").upper()
+                  "Caso contrário insira um token:  ")
 
     # Caso existam virgulas no input, o input é dividido para a lista
     if "," in value:

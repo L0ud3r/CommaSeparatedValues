@@ -5,8 +5,7 @@
 # uma tabela csv, html ou mesmo resutados em consola dos dados pedidos
 
 from reader import Reader
-from my_utils import printCountryShowStuff
-from menu import menu, get_country
+from menu import menu
 from printer import values_print, values_to_html, values_to_latex
 
 # Construção do objeto Reader
@@ -24,8 +23,5 @@ while option != -1:
         values_to_html(myDict)
     elif option == 3:
         values_to_latex(myDict)
-    elif option == 4:
-        pais = get_country()
-        printCountryShowStuff(pais, myDict)
     option = menu()
 

@@ -30,17 +30,4 @@ def getKeyFromIndex(index, dict_received):
             return key
         i += 1
 
-# Recebendo o input do user de um pais, verifica se este exisqte, se sim
-# printa as suas informacoes
-def printCountryShowStuff(country, dict_received):
-    if country in dict_received["COUNTRY"]:
-        i = 0
-        while i < len(dict_received["COUNTRY"]):
-            if country == dict_received["COUNTRY"][i]:
-                country_index = i
-                break
-            i += 1
-        for key in dict_received:
-            print(dict_received[key][country_index])
-    else:
-        print(f"{country} não existe.")
+
