@@ -21,6 +21,7 @@ def replace_multiple(text, dic):
         text = text.replace(i, j)
     return text
 
+
 # Obtem a chave de uma dictionary a partir do index
 def getKeyFromIndex(index, dict_received):
     i = 0

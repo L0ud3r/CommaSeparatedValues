@@ -64,7 +64,11 @@ class Reader:
         i = 0
         j = 0
         for token in iter(self.lexer.token, None):
-            token.value = replace_multiple(token.value, {'"': '', "\n": "", ",": ''})
+            #remove stuff
+            if token.value[0] == '"':
+                token.value = replace_multiple(token.value, {'"': '', "\n": ""})
+            else:
+                token.value = replace_multiple(token.value, {'"': '', "\n": "", ",": ''})
             token.value = token.value.replace("\n", "")
             if i == 0:
                 my_dict[token.value] = []
@@ -76,3 +80,5 @@ class Reader:
                     j = 0
                 else:
                     j += 1
+
+        return my_dict

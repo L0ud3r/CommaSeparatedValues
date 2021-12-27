@@ -40,7 +40,6 @@ def values_print(dict1):
             key_index = 0
             while key_index < key_indexes_size:
                 string_final = dict1[getKeyFromIndex(key_indexes[key_index], dict1)][value_index]
-                string_final = replace_multiple(string_final, {'"': '', "\n": ""})
                 print(string_final, end="\t")
                 key_index += 1
             print()
@@ -59,7 +58,6 @@ def values_print(dict1):
             key_index = 0
             while key_index < len(headers):
                 string_final = dict1[getKeyFromIndex(key_index, dict1)][value_index]
-                string_final = replace_multiple(string_final, {'"': '', "\n": ""})
                 print(string_final, end="\t")
                 key_index += 1
             print()
@@ -69,8 +67,7 @@ def values_print(dict1):
     else:
         print(value)
         for x in dict1[value]:
-            string_final = replace_multiple(x, {'"': '', "\n": ""})
-            print(string_final)
+            print(x)
 
 
 # Procedimento para imprimir num ficheiro HTML o dicionário que é lido pela função read
@@ -115,7 +112,6 @@ def values_to_html(dict1):
             html += "</tr><tr>"
             while key_index < key_indexes_size:
                 string_final = dict1[getKeyFromIndex(key_indexes[key_index], dict1)][value_index]
-                string_final = replace_multiple(string_final, {'"': '', "\n": ""})
                 html += f"<td>{string_final}</td>"
                 key_index += 1
 
@@ -136,7 +132,6 @@ def values_to_html(dict1):
             html += "</tr><tr>"
             while key_index < len(headers):
                 string_final = dict1[getKeyFromIndex(key_index, dict1)][value_index]
-                string_final = replace_multiple(string_final, {'"': '', "\n": ""})
                 html += f"<td>{string_final}</td>"
                 key_index += 1
             value_index += 1
@@ -145,8 +140,8 @@ def values_to_html(dict1):
     else:
         html += f"<th>{value}</th></tr>"
         for x in dict1[value]:
-            string_final = replace_multiple(x, {'"': '', "\n": ""})
-            html += f"</tr><tr><td>{string_final}</td>"
+
+            html += f"</tr><tr><td>{x}</td>"
 
     html += "</table></body></html>"
     f.write(html)
@@ -207,12 +202,10 @@ def values_to_latex(dict1):
             key_index = 0
             while key_index < key_indexes_size - 1:
                 string_final = dict1[getKeyFromIndex(key_indexes[key_index], dict1)][value_index]
-                string_final = replace_multiple(string_final, {'"': '', "&": "\\&", "\n": ""})
                 latex += f"{string_final} & "
                 key_index += 1
             if key_index == key_indexes_size - 1:
                 string_final = dict1[getKeyFromIndex(key_indexes[key_index], dict1)][value_index]
-                string_final = replace_multiple(string_final, {'"': '', "&": "\\&", "\n": ""})
                 latex += f"{string_final} \\\\ \hline "
             value_index += 1
 
@@ -229,11 +222,9 @@ def values_to_latex(dict1):
 
         for key in dict1:
             if i < headers_length - 1:
-                string_final = replace_multiple(key, {'"': '', "&": "\\&", "\n": ""})
-                latex += f"{string_final} & "
+                latex += f"{key} & "
             else:
-                string_final = replace_multiple(key, {'"': '', "&": "\\&", "\n": ""})
-                latex += f"{string_final} \\\\ [0.5ex] \hline \hline "
+                latex += f"{key} \\\\ [0.5ex] \hline \hline "
             i += 1
 
         # Printar linhas
@@ -243,12 +234,10 @@ def values_to_latex(dict1):
             while key_index < len(headers):
                 if key_index < len(headers)-1:
                     string_final = dict1[getKeyFromIndex(key_index, dict1)][value_index]
-                    string_final = replace_multiple(string_final, {'"': '', "\n": "", "&": "\\&"})
                     latex += f"{string_final} & "
                     key_index += 1
                 else:
                     string_final = dict1[getKeyFromIndex(key_index, dict1)][value_index]
-                    string_final = replace_multiple(string_final, {'"': '', "\n": "", "&": "\\&"})
                     latex += f"{string_final} \\\\ \hline "
                     key_index += 1
             value_index += 1
@@ -258,8 +247,7 @@ def values_to_latex(dict1):
         latex += 'c ||} \hline '
         latex += f"{value}\\\\[0.5ex] \hline\hline "
         for x in dict1[value]:
-            string_final = replace_multiple(x, {'"': '', "&": "\\&"})
-            latex += f"{string_final} \\\\ \hline "
+            latex += f"{x} \\\\ \hline "
 
     latex += "\end{tabular}\end{center}\end{document}"
     f.write(latex)
