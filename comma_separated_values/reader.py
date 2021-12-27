@@ -6,13 +6,10 @@ from my_utils import slurp, replace_multiple, getKeyFromIndex
 
 class Reader:
     # Tokens
-    tokens2 = ("COMMENTARY", "COLUMN", "COLUMNBEFORENL", "NEWLINE")
-    tokens = ("COUNTRY", "CAPITAL", "CURRENCY", "LANGUAGE", "COMMENTARY", "NEWLINE")
+    tokens = ("COMMENTARY", "COLUMN", "COLUMNBEFORENL", "NEWLINE")
 
     # States
-    states = (
-        ("columnbeforenl", "exclusive")
-    )
+
 
     # Ignore rule
     t_ANY_ignore = r","
@@ -21,44 +18,27 @@ class Reader:
 
 
     # Função que serve para reconhecer o campo Country do ficheiro de texto
-    def t_COUNTRY(self, t):
-        r"([A-Z]|[a-z])[^,]+"
-        t.type = "COUNTRY"
-        t.lexer.begin("capital")
-        return t
 
-    # Função que serve para reconhecer o campo Capital do ficheiro de texto
-    def t_capital_STR(self, t):
-        r'"([A-Z][a-z]*,?\s?)*"|(([A-Z]|[a-z])[^,]+)'
-        t.type = "CAPITAL"
-        t.lexer.begin("currency")
-        return t
-
-    # Função que serve para reconhecer o campo Currency do ficheiro de texto
-    def t_currency_STR(self, t):
-        r'"([A-Z]?[a-z]*,?\s?)*"|(([A-Z]|[a-z])[^,]+)'
-        t.type = "CURRENCY"
-        t.lexer.begin("language")
-        return t
-
-    # Função que serve para reconhecer o campo Language do ficheiro de texto
-    def t_language_STR(self, t):
-        r'".+"|(([A-Z]|[a-z])[^\n]+)'
-        t.type = "LANGUAGE"
-        t.lexer.begin("INITIAL")
-        return t
-
-    # Função para reconhecer comentários
     def t_COMMENTARY(self, t):
-        r"\#[^\n]+"
+        r"\#[^\n]+\n"
         pass
 
-    # Função que serve para reconhecer o "parágrafo"/"\n"/nova linha
+    def t_COLUMNBEFORENL(self, t):
+        r'[^\n,"]+\n|"[^\n"]+"\n'
+        t.type = "COLUMNBEFORENL"
+        return t
+
+    def t_COLUMN(self, t):
+        r'[^,\n"]+,|"[^"\n]+"'
+        t.type = "COLUMN"
+        return t
+
+
+
     def t_NEWLINE(self, t):
         r"\n"
         pass
 
-    # Função que retorna um erro caso o token lido não seja o esperado
     def t_ANY_error(self, t):
         print(f"Unexpected token: {t.value[:20]}")
         exit(1)
@@ -80,13 +60,19 @@ class Reader:
         my_dict = {}
         self.lexer.input(slurp(self.filename))
 
-        headers = [member for member in self.tokens if member not in ("COMMENTARY", "NEWLINE")]
-
-        i=0
+        #separate headers from non headers, save on memory
+        i = 0
+        j = 0
         for token in iter(self.lexer.token, None):
-            if i < len(headers):
-                my_dict[token.type] = []
-                i+=1
+            token.value = replace_multiple(token.value, {'"': '', "\n": "", ",": ''})
+            token.value = token.value.replace("\n", "")
+            if i == 0:
+                my_dict[token.value] = []
+                if token.type == "COLUMNBEFORENL":
+                    i += 1
             else:
-                my_dict[token.type].append(token.value)
-        return my_dict
+                my_dict[getKeyFromIndex(j, my_dict)].append(token.value)
+                if token.type == "COLUMNBEFORENL":
+                    j = 0
+                else:
+                    j += 1
