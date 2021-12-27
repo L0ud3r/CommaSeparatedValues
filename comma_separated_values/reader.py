@@ -6,13 +6,12 @@ from my_utils import slurp, replace_multiple, getKeyFromIndex
 
 class Reader:
     # Tokens
+    tokens2 = ("COMMENTARY", "COLUMN", "COLUMNBEFORENL", "NEWLINE")
     tokens = ("COUNTRY", "CAPITAL", "CURRENCY", "LANGUAGE", "COMMENTARY", "NEWLINE")
 
     # States
     states = (
-        ("capital", "exclusive"),
-        ("currency", "exclusive"),
-        ("language", "exclusive"),
+        ("columnbeforenl", "exclusive")
     )
 
     # Ignore rule
