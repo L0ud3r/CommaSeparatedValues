@@ -1,6 +1,6 @@
 # printer.py
 import webbrowser
-from my_utils import getKeyFromIndex, replace_multiple
+from my_utils import getKeyFromIndex
 
 
 # Procedimento para printar o dicionário que é lido pela função read
