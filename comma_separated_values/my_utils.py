@@ -29,5 +29,3 @@ def getKeyFromIndex(index, dict_received):
         if i == index:
             return key
         i += 1
-
-

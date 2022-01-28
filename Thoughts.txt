@@ -1,9 +1,0 @@
-1ª Linha: Header da tabela
-Todas as colunas são separadas por virgulas
-	t_STR = r"a-z|A-Z"
-Cada atributo que tiver multiplos valores está entre aspas ("aaa, bbb, ccc")
-	???
-Cada linha está distinta por um \n:
-	t_NEWLINE = r"\n"
-Não há \t neste documento
-Incluir no t_ignore --> #

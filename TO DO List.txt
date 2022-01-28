@@ -1,2 +1,0 @@
-To-Do:
-Permitir colunas com nomes iguais -> possivel fix: em vez de strings nas keys, ints, e primeira posiçao de cada lista é o header

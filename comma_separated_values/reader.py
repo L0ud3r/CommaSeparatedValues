@@ -3,42 +3,39 @@
 import ply.lex as lex
 from my_utils import slurp, replace_multiple, getKeyFromIndex
 
-
+# Classe com as funcionalidades necessárias para
 class Reader:
     # Tokens
     tokens = ("COMMENTARY", "COLUMN", "COLUMNBEFORENL", "NEWLINE")
 
-    # States
-
-
     # Ignore rule
     t_ANY_ignore = r","
 
-    # Funcoes de definicao de campo lexical
-
+# Funcoes de definicao de campo lexical
 
     # Função que serve para reconhecer o campo Country do ficheiro de texto
-
     def t_COMMENTARY(self, t):
         r"\#[^\n]+\n"
         pass
 
+    # Função de reconhecimento de texto da coluna antes do newline
     def t_COLUMNBEFORENL(self, t):
         r'[^\n,"]+\n|"[^\n"]+"\n'
         t.type = "COLUMNBEFORENL"
         return t
 
+    # Função de leitura de cada coluna exceto a ultima de cada linha
     def t_COLUMN(self, t):
         r'[^,\n"]+,|"[^"\n]+"'
         t.type = "COLUMN"
         return t
 
-
-
+    # Função de reconhecimento de uma newline
     def t_NEWLINE(self, t):
         r"\n"
         pass
 
+    # Função de controlo de erros (texto não esperado)
     def t_ANY_error(self, t):
         print(f"Unexpected token: {t.value[:20]}")
         exit(1)

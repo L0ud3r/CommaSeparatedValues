@@ -14,6 +14,7 @@ leitura = Reader.builder("list1.csv")
 # Leitura dos dados da tabela CSV
 myDict = leitura.read()
 
+# Menu
 option = menu()
 
 while option != -1:
@@ -24,4 +25,3 @@ while option != -1:
     elif option == 3:
         values_to_latex(myDict)
     option = menu()
-
